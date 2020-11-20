@@ -1,0 +1,45 @@
+version: "2.1"
+services:
+  drone-server:
+    container_name: drone-server
+    image: drone/drone:1
+    ports:
+      - 80:80
+    volumes:
+      - db-data:/var/lib/drone/
+    restart: always
+    environment:
+      # 是否允许注册，false 后只有在 DRONE_ADMIN 变量中指定的账户才能登录
+      - DRONE_OPEN=true
+
+      # Drone可公开访问的地址
+      # - DRONE_HOST=http://ci.eming.li
+
+      # 配置 Git 仓库，只能同时使用一种仓库
+      # Github 仓库需要配置上问申请到的 client id 和 client secret
+      - DRONE_GITHUB=true
+      - DRONE_SERVER_HOST=116.62.165.137 # tunnel hostname
+      - DRONE_GITHUB_SERVER=https://github.com
+      - DRONE_GITHUB_CLIENT_ID=bb6db0e782cc494c13dc
+      - DRONE_GITHUB_CLIENT_SECRET=bb61c6a5753c1bf2e16370e50c9e4dfd6d2fed95
+      - DRONE_SERVER_PROTO=http # tunnel adds https on top
+      - DRONE_RPC_SECRET=a31e71f6ccf1cf9768e7fde913778f01
+  drone-agent:
+    container_name: drone-agent
+    image: drone/agent:1.0.0
+    command: agent
+    restart: always
+    depends_on:
+      - drone-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_RPC_SERVER=http://drone-server
+      - DRONE_RPC_SECRET=a31e71f6ccf1cf9768e7fde913778f01
+      - DRONE_RUNNER_CAPACITY=2
+      - DRONE_RUNNER_NAME="local"
+      - DRONE_DEBUG=true
+        # 配置 SERVER 地址
+      - DRONE_SERVER=drone-server:9000
+volumes:
+  db-data:
