@@ -24,6 +24,7 @@ services:
       - DRONE_GITHUB_SERVER=https://github.com
       - DRONE_DEBUG=true
       - DRONE_LOGS_DEBUG=true
+      - DRONE_AGENTS_ENABLED=false
       - DRONE_LOGS_PRETTY=true
       - DRONE_LOGS_TRACE=true
       - DRONE_GITHUB_CLIENT_ID=bb6db0e782cc494c13dc
@@ -48,6 +49,7 @@ services:
       - DRONE_LOGS_DEBUG=true
       - DRONE_LOGS_PRETTY=true
       - DRONE_LOGS_TRACE=true
+      - DRONE_AGENTS_ENABLED=false
         # 配置 SERVER 地址
       - DRONE_SERVER=drone-server:9000
   drone-runner:
