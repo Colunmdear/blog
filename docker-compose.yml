@@ -3,6 +3,7 @@ services:
   drone-server:
     container_name: drone-server
     image: drone/drone:1
+    restart: always
     ports:
       - 80:80
     volumes:
@@ -20,6 +21,10 @@ services:
       - DRONE_GITHUB=true
       - DRONE_SERVER_HOST=116.62.165.137 # tunnel hostname
       - DRONE_GITHUB_SERVER=https://github.com
+      - DRONE_DEBUG=true
+      - DRONE_LOGS_DEBUG=true
+      - DRONE_LOGS_PRETTY=true
+      - DRONE_LOGS_TRACE=true
       - DRONE_GITHUB_CLIENT_ID=bb6db0e782cc494c13dc
       - DRONE_GITHUB_CLIENT_SECRET=bb61c6a5753c1bf2e16370e50c9e4dfd6d2fed95
       - DRONE_SERVER_PROTO=http # tunnel adds https on top
