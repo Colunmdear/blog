@@ -39,6 +39,9 @@ services:
       - DRONE_RUNNER_CAPACITY=2
       - DRONE_RUNNER_NAME="local"
       - DRONE_DEBUG=true
+      - DRONE_LOGS_DEBUG=true
+      - DRONE_LOGS_PRETTY=true
+      - DRONE_LOGS_TRACE=true
         # 配置 SERVER 地址
       - DRONE_SERVER=drone-server:9000
 volumes:
