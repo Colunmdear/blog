@@ -12,7 +12,8 @@ services:
     environment:
       # 是否允许注册，false 后只有在 DRONE_ADMIN 变量中指定的账户才能登录
       - DRONE_OPEN=true
-
+      # - DRONE_DATABASE_DATASOURCE=root:201314lfp@tcp(116.62.165.137:3306)/drone?parseTime=true
+      # - DRONE_DATABASE_DRIVER=mysqls
       # Drone可公开访问的地址
       # - DRONE_HOST=http://ci.eming.li
 
@@ -34,8 +35,6 @@ services:
     image: drone/agent:1.0.0
     command: agent
     restart: always
-    ports:
-      - 8282:8282
     depends_on:
       - drone-server
     volumes:
@@ -56,6 +55,8 @@ services:
     image: drone/drone-runner-docker:1
     command: runner
     restart: always
+    depends_on:
+      - drone-server
     ports:
       - 1433:1433
     environment:
@@ -72,6 +73,7 @@ services:
       - DRONE_GITHUB_SERVER=https://github.com
       - DRONE_DEBUG=true
       - DRONE_LOGS_DEBUG=true
+      - DRONE_RUNNER_NAME=test
       - DRONE_LOGS_PRETTY=true
       - DRONE_LOGS_TRACE=true
       - DRONE_GITHUB_CLIENT_ID=bb6db0e782cc494c13dc
