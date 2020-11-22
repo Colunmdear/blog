@@ -26,7 +26,8 @@ services:
       - DRONE_LOGS_DEBUG=true
       - DRONE_AGENTS_ENABLED=false
       - DRONE_LOGS_PRETTY=true
-      - DRONE_AGENTS_DISABLED=true
+      # 解决pending状态
+      - DRONE_AGENTS_DISABLED=true 
       - DRONE_LOGS_TRACE=true
       - DRONE_GITHUB_CLIENT_ID=bb6db0e782cc494c13dc
       - DRONE_GITHUB_CLIENT_SECRET=bb61c6a5753c1bf2e16370e50c9e4dfd6d2fed95
