@@ -47,10 +47,12 @@ services:
       - DRONE_RUNNER_CAPACITY=2
       - DRONE_RUNNER_NAME="local"
       - DRONE_DEBUG=true
+      - DRONE_RUNNER_NETWORKS=bridge 
       - DRONE_LOGS_DEBUG=true
       - DRONE_LOGS_PRETTY=true
       - DRONE_LOGS_TRACE=true
       - DRONE_AGENTS_DISABLED=true
+      - DRONE_AGENTS_ENABLED=true
         # 配置 SERVER 地址
       - DRONE_SERVER=drone-server:9000
   # drone-runner:
