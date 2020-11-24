@@ -1,16 +1,10 @@
 kind: pipeline
-name: blog
+name: default
 
 steps:
-  # api unit test
-  - name: blog-web
-    image: node:11
-    commands:
-      - npm install
-      - npm run docs:build
-trigger:
-  branch:
-    - master
-  event:
-    - pull_request
-    - push
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: hello-world
+      tags: latest
+      dry_run: true
