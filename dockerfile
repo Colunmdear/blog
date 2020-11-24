@@ -1,26 +1,37 @@
-docker run \
-  --volume=/var/lib/drone:/data \
-  --env=DRONE_GITHUB_CLIENT_ID={{bb6db0e782cc494c13dc}} \
-  --env=DRONE_GITHUB_CLIENT_SECRET={{bb61c6a5753c1bf2e16370e50c9e4dfd6d2fed95}} \
-  --env=DRONE_RPC_SECRET={{a31e71f6ccf1cf9768e7fde913778f01}} \
-  --env=DRONE_SERVER_HOST={{116.62.165.137}} \
-  --env=DRONE_SERVER_PROTO={{http}} \
-  --publish=80:80 \
-  --publish=443:443 \
-  --restart=always \
-  --detach=true \
-  --name=drone \
-  drone/drone:1
+# # 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
+# COPY dist/  /workspace/blog/nginx/html/
+# COPY nginx.conf /etc/nginx/nginx.conf
+# RUN echo 'echo init ok!!'
+# # This my first nginx Dockerfile
+# # Version 1.0
 
+# # Base images 基础镜像
+# FROM nginx
 
-  docker run -d \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -e DRONE_RPC_PROTO=http \
-  -e DRONE_RPC_HOST=116.62.165.137 \
-  -e DRONE_RPC_SECRET=a31e71f6ccf1cf9768e7fde913778f01 \
-  -e DRONE_RUNNER_CAPACITY=2 \
-  -e DRONE_RUNNER_NAME=test \
-  -p 3000:3000 \
-  --restart always \
-  --name runner \
-  drone/drone-runner-docker:1
+# #MAINTAINER 维护者信息
+# MAINTAINER Colunmdear 
+
+# #ENV 设置环境变量
+# ENV PATH /usr/local/nginx/sbin:$PATH
+
+# #ADD  文件放在当前目录下，拷过去会自动解压
+# ADD nginx-1.8.0.tar.gz /usr/local/  
+# ADD epel-release-latest-7.noarch.rpm /usr/local/  
+
+# #RUN 执行以下命令 
+# RUN rpm -ivh /usr/local/epel-release-latest-7.noarch.rpm
+# RUN yum install -y wget lftp gcc gcc-c++ make openssl-devel pcre-devel pcre && yum clean all
+# RUN useradd -s /sbin/nologin -M www
+
+# #WORKDIR 相当于cd
+# WORKDIR /usr/local/nginx-1.8.0 
+
+# RUN ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-pcre && make && make install
+
+# RUN echo "daemon off;" >> /etc/nginx.conf
+
+# #EXPOSE 映射端口
+# EXPOSE 80
+
+# #CMD 运行以下命令
+# CMD ["nginx"]
