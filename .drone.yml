@@ -1,8 +1,8 @@
 kind: pipeline
-name: api
+name: blog
 steps:
   # api unit test
-  - name: test
+  - name: blog-web
     image: node:11
     depends_on: [clone]
     commands:
