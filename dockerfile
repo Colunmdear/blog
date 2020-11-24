@@ -1,12 +1,12 @@
-# # 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
-# COPY dist/  /workspace/blog/nginx/html/
+# 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
 # COPY nginx.conf /etc/nginx/nginx.conf
 # RUN echo 'echo init ok!!'
 # # This my first nginx Dockerfile
 # # Version 1.0
 
 # # Base images 基础镜像
-# FROM nginx
+FROM nginx
+COPY dist/  /workspace/blog/nginx/html/
 
 # #MAINTAINER 维护者信息
 # MAINTAINER Colunmdear 
