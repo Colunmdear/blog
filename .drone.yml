@@ -1,17 +1,10 @@
 kind: pipeline
 name: blog
 
-clone:
-  git:
-    image: plugins/git
-    network_mode: host
-    tags: true
-
 steps:
   # api unit test
   - name: blog-web
     image: node:11
-    depends_on: [tags]
     commands:
       - npm install
       - npm run docs:build
